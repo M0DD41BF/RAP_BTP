@@ -1,0 +1,48 @@
+@Metadata.layer: #CORE
+@UI: { headerInfo: { typeName: 'Item', title : { type: #STANDARD, label: 'Assigning To Manager', value: 'Name' } } }
+@UI.presentationVariant: [{ sortOrder: [{ by: 'DocUid' }] }]
+
+annotate view Zc_Doctor
+    with 
+{
+@UI.facet: [ { id: 'Docid',purpose: #STANDARD, 
+type: #IDENTIFICATION_REFERENCE,label: 'Doctor', position: 10 } ]
+
+@UI: { lineItem: [ { position:40 , label: 'DocUid' } ],
+ identification: [ { position: 50,label: 'DocUid' } ] }
+   DocUid;
+
+@UI: { lineItem: [ { position:40 , label: 'HosUid' } ],
+ identification: [ { position: 50,label: 'HosUid' } ] }    
+    HosUid;
+   
+ @UI: { lineItem: [ { position:40 , label: 'Name' } ],
+ identification: [ { position: 50,label: 'Name' } ] }    
+    Name;
+ 
+  @UI: { lineItem: [ { position:40 , label: 'Age' } ],
+ identification: [ { position: 50,label: 'Age' } ] }    
+    
+    Age;
+ 
+ @UI: { lineItem: [ { position:40 , label: 'Department' } ],
+ identification: [ { position: 50,label: 'Department' } ] } 
+ Department;
+      
+ @UI: { lineItem: [ { position:40 , label: 'Status' } ] }   
+ status_data;
+ 
+  @UI: { identification: [ { position:40 , label: 'Status' } ] }  
+ Status;
+    
+  @UI: { lineItem: [ { position:40 , label: 'Authority' } ],
+ identification: [ { position: 50,label: 'Authority' } ] }    
+    Authority;
+    
+ @UI: { lineItem: [ { position:40 , label: 'Place' } ],
+ identification: [ { position: 50,label: 'Place' } ] }      
+    Place;
+    /* Associations */
+   
+    
+}

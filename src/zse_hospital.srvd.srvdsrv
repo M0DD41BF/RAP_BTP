@@ -1,0 +1,7 @@
+@EndUserText.label: 'Service definition'
+define service ZSE_HOSPITAL {
+  expose ZC_HOSPITAL;
+  expose ZC_PATIENT;
+  expose Zc_Doctor;
+  expose ZC_APPOINMENT;
+}

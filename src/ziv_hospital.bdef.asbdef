@@ -1,0 +1,126 @@
+unmanaged implementation in class zcl_iv_hospital unique;
+//strict ( 2 );
+with draft;
+define behavior for Ziv_Hospital alias hospital
+//late numbering
+draft table zdr_hospital
+lock master total etag Lastchangedat
+authorization master ( instance )
+//etag master <field_name>
+{
+  field ( mandatory ) HosName, ContactNumber;
+  field ( readonly, numbering : managed ) HosId;
+  field ( readonly ) Createdat, Createdby, Lastchangedat, Lastchangedby;
+  create;
+  update;
+  delete;
+  validation vald on  save { create; field HosName, EmailAddress, ContactNumber; }
+  determination fill_code on modify  { field city;}
+  determination hed_itm_authority on modify {
+  field authority;}
+  determination gmail on modify {
+  field EmailAddress;}
+
+
+  draft determine action prepare
+  {
+    validation vald;
+  }
+  action ( features : instance ) Create_action result [1] $self;
+  action ( features : instance ) Delete_action result [1] $self;
+  factory action copy [1];
+
+  mapping for zdb_hospital_hd control zdb_hospital_x corresponding
+     {
+       HosId    = hos_id;
+       HosName  = hos_name;
+       street         = street;
+       postalcode     = postal_code;
+       city           = city;
+       contactnumber  = contact_number;
+       emailaddress   = email_address;
+       createdat     = createdat;
+       createdby     = createdby;
+       lastchangedat = lastchangedat;
+       lastchangedby = lastchangedby;
+       soft_dele      = soft_dele;
+     }
+
+  association _Item { create; }
+  association _doctor { create; }
+  association _appoint { create; }
+}
+
+define behavior for ZIV_PATIENT alias patient
+//late numbering
+draft table zdr_patient
+lock dependent by _Header
+authorization dependent by _Header
+//etag master <field_name>
+{
+  field ( numbering : managed, readonly ) PatUid;
+  update;
+  delete;
+  mapping for zdb_hospital_itm control zdb_patient_x corresponding
+     {
+       PatUid     = pat_uid;
+       HospUid    = hosp_uid;
+       authority  = authority;
+       Name       = name;
+       Place      = place;
+       Currency   = currency;
+       Department = department;
+     }
+   field ( readonly ) HospUid;
+   association _Header;
+
+}
+
+define behavior for ZIV_DOCTOR alias doctor
+	draft table zdr_doctor
+	lock dependent by _Header
+	authorization dependent by _Header
+	{
+     field ( numbering : managed, readonly ) docuid;
+     field ( readonly ) HosUid;
+//     create;
+     update;
+     delete;
+     mapping for zdb_doctor control zdb_doctor_x corresponding
+     {
+       docUid     = doc_uid;
+       HosUid    = hos_uid;
+       authority  = authority;
+       Name       = name;
+       Place      = place;
+       status     = status;
+       Department = department;
+     }
+     association _Header;
+}	
+
+
+define behavior for ziv_appoinment alias appoint
+  draft table zdr_appoint
+  lock dependent by _header
+  authorization dependent by _Header
+  {
+    field ( numbering : managed, readonly ) opatid;
+    field ( readonly ) HosUid;
+    update;
+    delete;
+    mapping for zdb_appoinment control zdb_appoint_x corresponding
+    {
+     opatid       = opatid;
+     hosuid       = hos_uid;
+     name         = name;
+     age          = age;
+     cause        = cause;
+     AppoinmentNo = appoinment_no;
+     docuid       = doc_uid;
+     zdate        = zdate;
+     place        = place;
+     amount       = amount;
+    }
+     association _Header;
+  }

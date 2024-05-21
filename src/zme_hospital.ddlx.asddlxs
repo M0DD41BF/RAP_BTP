@@ -1,0 +1,300 @@
+@Metadata.layer: #CORE
+@UI:{ 
+headerInfo: { typeName: 'Hospital',
+
+              typeNamePlural: 'Hospitals',typeImageUrl: 'https://cdn.dribbble.com/users/8376418/screenshots/16108813/hospital_edited.jpg',
+
+              title: { type: #STANDARD, label: 'Hospital', value: 'HosName' } }
+
+// presentationVariant: [{ sortOrder: [{ by: 'Hospital_Id', direction: #ASC}] }] 
+}
+@Search.searchable: true
+
+annotate view ZC_HOSPITAL with 
+{
+   @UI.facet: [
+
+   { id: 'Hospital',
+                  purpose: #STANDARD,
+
+                  type: #IDENTIFICATION_REFERENCE, 
+
+                  label: 'Hospital Details',
+
+                  position: 10 },
+
+                   {
+
+        type: #DATAPOINT_REFERENCE,
+
+        targetQualifier: 'DP1',
+
+        purpose: #HEADER
+
+        },
+
+          {
+
+        type: #COLLECTION,
+
+        id: 'Collect1',
+
+        purpose: #STANDARD,
+
+        label: 'Hospital Details',
+
+        position: 10
+
+        },
+
+      {
+
+        type: #FIELDGROUP_REFERENCE,
+
+        parentId: 'Collect1',
+
+        label: 'Hospital Name',
+
+        targetQualifier: 'FG1',
+
+        position: 10
+
+        },
+
+      {
+
+        type: #FIELDGROUP_REFERENCE,
+
+        parentId: 'Collect1',
+
+        label: 'Hospital Adress',
+
+        targetQualifier: 'FG2',
+
+        position: 20
+
+        },
+
+      {
+
+        type: #FIELDGROUP_REFERENCE,
+
+        parentId: 'Collect1',
+
+        label: 'Hospital Contact',
+
+        targetQualifier: 'FG3',
+
+        position: 30
+
+        },
+
+        {
+
+        type: #FIELDGROUP_REFERENCE,
+
+        parentId: 'Collect1',
+
+        label: 'Hospital Category',
+
+        targetQualifier: 'FG4',
+
+        position: 30
+
+        },
+
+        {
+
+        type: #FIELDGROUP_REFERENCE,
+
+        parentId: 'Collect1',
+
+        label: 'Hopital Created and Changed Data',
+
+        targetQualifier: 'FG5',
+
+        position: 30
+
+        },
+       {id: 'Docid', type: #LINEITEM_REFERENCE,purpose: #STANDARD, position: 30, label: 'Doctor', 
+
+       targetElement: '_Doctor' ,hidden: #( VI_ITEMS ) },
+                 
+       {id: 'Itemid', type: #LINEITEM_REFERENCE,purpose: #STANDARD, position: 50, label: 'Patient', 
+
+       targetElement: '_Item',hidden: #( VI_ITEMS ) },
+       
+       
+        {id: 'Appoint', type: #LINEITEM_REFERENCE,purpose: #STANDARD, position: 50, label: 'Appoinment', 
+
+       targetElement: '_Appoint',hidden: #( VI_ITEMS ) }]
+       
+       
+
+   @UI: { selectionField: [{ position: 10 }], lineItem: [{ position: 10 , type: #FOR_ACTION , dataAction: 'copy', label: 'Copy Hospital' }],
+   
+          fieldGroup: [{ position: 10 ,qualifier: 'FG1' }] }
+
+//   hospital_id;
+   HosId;
+   
+
+   @UI: { lineItem: [ { position:10 , label: 'Hospital Name' } ],
+
+ //  identification: [ { position: 20, label: 'Hospital Name' } ],
+    
+ fieldGroup: [{ position: 10, qualifier: 'FG1'  }]
+
+   }
+   @Search.defaultSearchElement: true   
+   @EndUserText.label: 'Hospital Name'  
+   @Search.fuzzinessThreshold: 0.5
+
+   
+//   hospital_name;
+    
+   HosName;
+   @UI: { lineItem: [ { position:20 , label: 'Street' } ],
+
+//   identification: [ { position: 30, label: 'Street' } ]
+ fieldGroup: [{ position: 20, qualifier: 'FG2'  }]
+
+   }
+
+   Street;
+   @UI: { lineItem: [ { position:40 , label: 'Postalcode' } ],
+
+//   identification: [ { position: 40, label: 'Postalcode' } ],
+
+ fieldGroup: [{ position: 30, qualifier: 'FG2'  }],
+
+          selectionField: [{ position: 10 }]
+
+   }
+
+   PostalCode;
+   @UI: { lineItem: [ { position:50 , label: 'city' } ],
+
+//   identification: [ { position: 50, label: 'city' } ]
+
+ fieldGroup: [{ position: 40, qualifier: 'FG2'  }]
+
+   }
+
+   
+   City;
+@UI.dataPoint: { qualifier: 'DP1', title: 'Status', criticality: 'crtitalstatus',criticalityRepresentation: #WITH_ICON }
+
+    @UI: { lineItem: [ { position:55 , label: 'Hospital Status',criticality: 'crtitalstatus',criticalityRepresentation: #WITH_ICON } ]    
+   }
+
+  Hospital_status;
+  @UI: { lineItem: [ { position:60 , label: 'Hopital Condition' } ],
+
+//   identification: [ { position: 60, label: 'Contact Number' } ]
+
+ fieldGroup: [{ position: 50, qualifier: 'FG3',label: 'Hospital Condition'  }] }
+Hospital_condition;
+
+  
+ @UI: { lineItem: [ { position:60 , label: 'Contact Number' } ],
+
+//   identification: [ { position: 60, label: 'Contact Number' } ]
+
+ fieldGroup: [{ position: 50, qualifier: 'FG3'  }]
+
+   }
+
+
+   ContactNumber;
+  @UI: { lineItem: [ { position:70 , label: 'EmailAddress' } ],
+
+//   identification: [ { position: 70, label: 'EmailAddress' } ]
+
+fieldGroup: [{ position: 60, qualifier: 'FG3'  }]
+
+   }
+
+   
+
+   EmailAddress; 
+  @UI: { lineItem: [ { position:80 , label: 'Authority' } ],
+
+//   identification: [ { position: 80, label: 'Authority' } ]
+
+fieldGroup: [{ position: 70, qualifier: 'FG4'  }]
+
+   }
+
+  Authority;
+
+    @UI: { lineItem: [ { position:90 , label: ' Created_by' } ],
+
+//   identification: [ { position: 90, label: ' Created_by' } ]
+
+fieldGroup: [{ position: 80, qualifier: 'FG5'  }]
+
+   }
+
+   
+//   created_by;
+   Createdby;
+
+    @UI: { lineItem: [ { position:100 , label: ' created_at' } ],
+
+//   identification: [ { position: 100, label: ' created_at' } ]
+
+fieldGroup: [{ position: 90, qualifier: 'FG5'  }]
+
+   }
+
+   
+
+//   created_at;
+   Createdat;
+
+    @UI: { lineItem: [ { position:110 , label: 'lastchanged_by' } ],
+
+//   identification: [ { position: 110, label: 'lastchanged_by' } ]
+
+fieldGroup: [{ position: 100, qualifier: 'FG5'  }]
+
+   }
+
+   
+
+//   lastchanged_by;
+   Lastchangedby;
+
+    @UI: { lineItem: [ { position:120 , label: 'lastchanged_at' } ],
+
+//   identification: [ { position: 120, label: 'lastchanged_at' } ]
+
+fieldGroup: [{ position: 110, qualifier: 'FG5'  }]
+
+   }
+
+   
+
+//   lastchanged_at;
+   Lastchangedat;
+   
+    @UI: { lineItem: [ { position:130 , label: 'Approval' } ],
+    lineItem: [{ type: #FOR_ACTION, dataAction: 'Create_action'} ],
+
+   
+
+   identification: [ { position: 130, label: 'Approval', type: #FOR_ACTION, dataAction: 'Create_action' } ],
+   fieldGroup: [{ position: 110, qualifier: 'FG5'  }]
+  }
+
+   action;
+  @UI: { lineItem: [ { position:140 , label: 'DeleteIndicator' ,
+     type: #FOR_ACTION, dataAction: 'Delete_action'} ],
+   identification: [ { position: 130, label: 'DeleteIndicator', type: #FOR_ACTION, dataAction: 'Delete_action' } ]
+
+   }  
+
+//  soft_dele;
+  SoftDele;
+}

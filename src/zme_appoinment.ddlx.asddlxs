@@ -1,0 +1,59 @@
+
+@Metadata.layer: #CORE
+@UI: { headerInfo: { typeName: 'Item', title : { type: #STANDARD, label: 'Assigning To Manager', value: 'Name' } } }
+@UI.presentationVariant: [{ sortOrder: [{ by: 'DocUid' }] }]
+
+
+
+annotate view ZC_APPOINMENT
+    with 
+{
+    
+@UI.facet: [ { id: 'Appoint',purpose: #STANDARD, 
+type: #IDENTIFICATION_REFERENCE,label: 'opatid', position: 10 } ]
+
+@UI: { lineItem: [ { position:40 , label: 'Patid' } ],
+ identification: [ { position: 50,label: 'Patid' } ] }
+   Opatid;
+
+ @UI: { lineItem: [ { position:40 , label: 'Doctor id' } ],
+  identification: [ { position: 50,label: 'Doctor id' } ] }    
+ DocUid;
+
+@UI: { lineItem: [ { position:40 , label: 'HosUid' } ],
+ identification: [ { position: 50,label: 'HosUid' } ] }    
+    HosUid;
+   
+ @UI: { lineItem: [ { position:40 , label: 'Name' } ],
+ identification: [ { position: 50,label: 'Name' } ] }    
+    Name;
+ 
+  @UI: { lineItem: [ { position:40 , label: 'Age' } ],
+ identification: [ { position: 50,label: 'Age' } ] }    
+ Age;
+ 
+ @UI: { lineItem: [ { position:40 , label: 'Cause' } ],
+ identification: [ { position: 50,label: 'Cause' } ] } 
+ Cause;
+      
+ @UI: { lineItem: [ { position:40 , label: 'Appoinment No' } ], 
+ identification: [ { position: 50,label: 'Appoinment No' } ] }    
+ AppoinmentNo;
+     
+  @UI: { lineItem: [ { position:40 , label: 'Date' } ],
+ identification: [ { position: 50,label: 'Date' } ] }    
+  Zdate;
+       
+ @UI: { lineItem: [ { position:40 , label: 'Place' } ],
+ identification: [ { position: 50,label: 'Place' } ] }      
+    Place;
+    
+ @UI: { lineItem: [ { position:40 , label: 'Amount' } ],
+ identification: [ { position: 50,label: 'Amount' } ] }      
+    Amount;   
+    
+    /* Associations */
+ 
+}
+    
+   
